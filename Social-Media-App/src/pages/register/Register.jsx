@@ -1,4 +1,5 @@
 import "./register.scss";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   return (
@@ -12,7 +13,9 @@ export const Register = () => {
               aliquam!
             </p>
             <span>Já possui uma conta?</span>
-            <button>Entre</button>
+            <Link to="/login">
+              <button>Entrar</button>
+            </Link>
           </div>
           <div className="right">
             <h1>Cadastre-se</h1>
