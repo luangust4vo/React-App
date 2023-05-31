@@ -1,23 +1,24 @@
 import React, { useState } from "react";
-import { TodoForm } from "./TodoForm";
 import { Todo } from "./Todo";
-import { EditTodoForm } from "./EditTodoForm";
+import TodoForm from "./TodoForm";
+import EditTodoForm from "./EditTodoForm";
 import { v4 as uuid } from "uuid";
 uuid();
 
 export const TodoWrapper = () => {
   const [todos, setTodos] = useState([]);
-
   const addTodo = (todo) => {
-    setTodos([
-      ...todos,
-      {
-        id: uuid(),
-        task: todo,
-        completed: false,
-        isEditing: false,
-      },
-    ]);
+    typeof todo === "string" && todo.trim() !== ""
+      ? setTodos([
+          ...todos,
+          {
+            id: uuid(),
+            task: todo,
+            completed: false,
+            isEditing: false,
+          },
+        ])
+      : alert("Escreva algo");
   };
 
   const toggleComplete = (id) => {
@@ -54,7 +55,7 @@ export const TodoWrapper = () => {
       <TodoForm addTodo={addTodo} />
       {todos.map((todo, index) =>
         todo.isEditing ? (
-          <EditTodoForm editTodo={editTask} task={todo} />
+          <EditTodoForm key={index} editTask={editTask} task={todo} />
         ) : (
           <Todo
             task={todo}
